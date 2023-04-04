@@ -1,12 +1,38 @@
+## As a good portion of this code is directly from Geeks 4 Geeks,
+## I will signify what portions of code are MINE (written, not dictated)
+## This signifier will be with the line MW
+
 import jwt
 import requests
 import json
 from time import time
 
+## MW START
+import os
+from dotenv import load_dotenv
+## MW END
 
-# Enter your API key and your API secret
-API_KEY = 'Your API key'
-API_SEC = 'Your API secret'
+
+## MW START
+
+load_dotenv()
+
+API_KEY = os.getenv('API_KEY')
+API_SECRET = os.getenv('API_SECRET')
+
+# file = open('.env', 'r', encoding='utf-8')
+
+# line = file.readline()
+# line2 = file.readline()
+
+# API_KEY = line
+# API_SEC = line2
+
+print(API_KEY)
+print(API_SECRET)
+
+## MW END
+
 
 # create a function to generate a token
 # using the pyjwt library
@@ -20,7 +46,7 @@ def generateToken():
 		{'iss': API_KEY, 'exp': time() + 5000},
 
 		# Secret used to generate token signature
-		API_SEC,
+		API_SECRET,
 
 		# Specify the hashing alg
 		algorithm='HS256'
