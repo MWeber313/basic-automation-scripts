@@ -55,29 +55,32 @@ def generateToken():
 
 
 # create json data for post requests
-meetingdetails = {"topic": "The title of your zoom meeting",
-				"type": 2,
-				"start_time": "2019-06-14T10: 21: 57",
-				"duration": "45",
-				"timezone": "Europe/Madrid",
-				"agenda": "test",
-
-				"recurrence": {"type": 1,
-								"repeat_interval": 1
-								},
-				"settings": {"host_video": "true",
-							"participant_video": "true",
-							"join_before_host": "False",
-							"mute_upon_entry": "False",
-							"watermark": "true",
-							"audio": "voip",
-							"auto_recording": "cloud"
-							}
-				}
+meetingdetails = {
+    "topic": "Dennyzens Hangout",
+    "type": 2,
+    "start_time": "2019-06-14T10: 21: 57",
+    "duration": "120",
+    "timezone": "America/Los_Angeles",
+    "agenda": "Study and hunt for jobs together",
+    "recurrence": {
+        "type": 8,
+        "end_times": 10,
+        "repeat_interval": 10,
+        "type": 1,
+    },
+    "settings": {
+        "host_video": "false",
+        "participant_video": "false",
+        "join_before_host": "true",
+        "mute_upon_entry": "false",
+        "watermark": "true",
+        "audio": "voip",
+        "auto_recording": "cloud"
+    }
+}
 
 # send a request with headers including
 # a token and meeting details
-
 
 def createMeeting():
 	headers = {'authorization': 'Bearer ' + generateToken(),
