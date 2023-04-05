@@ -6,14 +6,13 @@ import jwt
 import requests
 import json
 from time import time
-
-## MW START
+from tkinter import *
 import os
 from dotenv import load_dotenv
-## MW END
-
 
 ## MW START
+
+tkInstance = Tk()
 
 load_dotenv()
 
@@ -57,19 +56,13 @@ def generateToken():
 # create json data for post requests
 meetingdetails = {
     "topic": "Dennyzens Hangout",
-    "type": 2,
-    "start_time": "2019-06-14T10: 21: 57",
     "duration": "120",
     "timezone": "America/Los_Angeles",
     "agenda": "Study and hunt for jobs together",
-    "recurrence": {
-        "type": 8,
-        "end_times": 10,
-        "repeat_interval": 10,
-        "type": 1,
-    },
+    "type": 1,
     "settings": {
         "host_video": "false",
+        "waiting_room": "false",
         "participant_video": "false",
         "join_before_host": "true",
         "mute_upon_entry": "false",
@@ -85,19 +78,17 @@ meetingdetails = {
 generateToken()
 
 def createMeeting():
-	headers = {'authorization': 'Bearer ' + generateToken(),
-			'content-type': 'application/json'}
-
-	response = requests.post(
-		f'https://api.zoom.us/v2/users/me/meetings',
-		headers=headers, data=json.dumps(meetingdetails))
-
-	solution = json.loads(response.text)
-	join_URL = solution["join_url"]
-
-	URL = print(f'{join_URL}')
-
-	return URL
+    headers = {'authorization': 'Bearer ' + generateToken(), 'content-type': 'application/json'}
+    response = requests.post(f'https://api.zoom.us/v2/users/me/meetings', headers=headers, data=json.dumps(meetingdetails))
+    solution = json.loads(response.text) 
+    join_URL = solution["join_url"] 
+    tkInstance.withdraw()
+    tkInstance.clipboard_clear()
+    tkInstance.clipboard_append(join_URL)
+    tkInstance.update()
+    tkInstance.destroy()
+    URL = print(f'Your zoom link: {join_URL}, it has been copied to your clipboard!')
+    return URL
 
 
 # run the create meeting function
