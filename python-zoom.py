@@ -86,7 +86,7 @@ def createMeeting():
     tkInstance.clipboard_clear()
     tkInstance.clipboard_append(join_URL)
     tkInstance.update()
-    print(tkInstance.clipboard_get())
+    # print(tkInstance.clipboard_get())
     tkInstance.destroy()
     URL = print(f'Your zoom link: {join_URL}, it has been copied to your clipboard!')
     return URL
