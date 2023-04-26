@@ -17,7 +17,10 @@ current_dir = os.listdir('D:\Games\BATTLETECH Heavy Metal\BattleTech_Data\Stream
 for file in current_dir:
     with open(f'D:\Games\BATTLETECH Heavy Metal\BattleTech_Data\StreamingAssets\data\weapon\{file}', 'r+') as file_object:
         contents = json.load(file_object)
-        contents['Tonnage'] = 1
+        if contents['Category'] == 'AntiPersonnel':
+            contents['Tonnage'] = 0.5
+        else:
+            contents['Tonnage'] = 1
         file_object.seek(0)
         json.dump(contents, file_object, indent=4)
         file_object.truncate()
