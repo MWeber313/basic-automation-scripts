@@ -10,6 +10,8 @@ select_dir = askdirectory(title="Select Folder")
 current_dir = os.listdir(select_dir)
 
 
+
+
 for file in current_dir:
     with open(f'{select_dir}\{file}', 'r+') as file_object:
         contents = json.load(file_object)
